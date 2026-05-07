@@ -1,12 +1,56 @@
 import { Router } from "express";
-// Importa obeto controladores de especialidades
+import { check, param } from "express-validator";
 import { EspecialidadesController } from "../controllers/especialidades.controller.js";
+import { validarCampos } from "../middlewares/errorHandler.js";
 
 const router = Router();
 
-router.get('/', EspecialidadesController.obtenerEspecialidades) //Cuando alguien haga una petición GET a la ruta principal (/), pasa el pedido directamente a obtenerEspecialidades de controller
-router.post('/', EspecialidadesController.crearEspecialidad);
-router.put('/:id_especialidad', EspecialidadesController.actualizarEspecialidad);
-router.delete('/:id_especialidad', EspecialidadesController.eliminarEspecialidad);
+// GET — todas las especialidades
+router.get("/", EspecialidadesController.buscarTodas);
+
+// GET — una especialidad por ID
+router.get(
+    "/:id",
+    [
+        param("id", "El ID debe ser un número entero").isInt(),
+        validarCampos
+    ],
+    EspecialidadesController.buscarPorId
+);
+
+// POST — crear especialidad
+router.post(
+    "/",
+    [
+        check("nombre")
+            .notEmpty().withMessage("El nombre es obligatorio.")
+            .isLength({ max: 120 }).withMessage("Máximo 120 caracteres."),
+        validarCampos
+    ],
+    EspecialidadesController.crear
+);
+
+// PUT — modificar especialidad
+router.put(
+    "/:id",
+    [
+        param("id", "El ID debe ser un número entero").isInt(),
+        check("nombre")
+            .notEmpty().withMessage("El nombre es obligatorio.")
+            .isLength({ max: 120 }).withMessage("Máximo 120 caracteres."),
+        validarCampos
+    ],
+    EspecialidadesController.modificar
+);
+
+// DELETE — eliminar especialidad
+router.delete(
+    "/:id",
+    [
+        param("id", "El ID debe ser un número entero").isInt(),
+        validarCampos
+    ],
+    EspecialidadesController.eliminar
+);
 
 export default router;
