@@ -1,7 +1,7 @@
 import mysql from "mysql2/promise";
 import { connection } from "./connection.js";
 
-export class EspecialidadesModel {
+export class Especialidades {
   static async listarEspecialidades(param) {
     //si no trae parametros lista todas las especialidades, si trae un id de especialidad lista solo esa especialidad
     try {
