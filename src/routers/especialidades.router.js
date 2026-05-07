@@ -5,8 +5,11 @@ import { validarCampos } from "../middlewares/errorHandler.js";
 
 const router = Router();
 
-// GET — todas las especialidades
-router.get("/", EspecialidadesController.obtenerEspecialidades);
+// GET de todas las especialidades
+router.get(
+    "/",
+    EspecialidadesController.obtenerEspecialidades
+);
 
 // GET — una especialidad por ID
 router.get(
@@ -15,10 +18,10 @@ router.get(
         param("id_especialidad", "El ID debe ser un número entero").isInt(),
         validarCampos
     ],
-    EspecialidadesController.obtenerEspecialidades
+    EspecialidadesController.obtenerEspecialidadPorId
 );
 
-// POST — crear especialidad
+// POST para crear especialidad
 router.post(
     "/",
     [
