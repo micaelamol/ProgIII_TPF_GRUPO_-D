@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-//import especialidadesRouter from "./src/routers/especialidadesRouter.js";
+import especialidadesRouter from "./src/routers/especialidades.router.js";
 // decomentar una vez creado archivo router
 
 dotenv.config();
@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 // Rutas
-//app.use("/api/v1/especialidades", especialidadesRouter);
+app.use("/api/v1/especialidades", especialidadesRouter);
 // decomentar una vez creado archivo router
 
 // Ruta de prueba
