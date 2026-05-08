@@ -7,11 +7,11 @@ const obtenerEspecialidades = async (req, res) => {
         res.status(200).json({
             listado,
             estado: true,
-            msg: "Especialidades obtenidas con éxito!",
+            msg: "Especialidades obtenidas con éxito! 🎉",
         });
     } catch (error) {
-        /* console.log(error); */
-        res.status(500).json({ estado: false, msg: "Error al obtener especialidades" });
+        // console.log(error); 
+        res.status(500).json({ estado: false, msg: "❌ Error al obtener especialidades" });
     }
 };
 
@@ -23,10 +23,10 @@ const obtenerEspecialidadPorId = async (req, res) => {
         res.status(200).json({
             listado,
             estado: true,
-            msg: "Especialidad obtenida con éxito!",
+            msg: "Especialidad obtenida con éxito! 🎉",
         });
     } catch (error) {
-        /* console.log(error); */
+        // console.log(error);
         res.status(error.status || 500).json({ estado: false, msg: error.message });
     }
 };
@@ -37,13 +37,13 @@ const crearEspecialidad = async (req, res) => {
         const { nombre } = req.body;
         const unaEspecialidad = await Especialidades.crearEspecialidad(nombre);
         res.status(201).json({
-            unaEspecialidad,
+            especialidad: unaEspecialidad,
             estado: true,
-            msg: "Especialidad creada con éxito!",
+            msg: "Especialidad creada con éxito! 🎉",
         });
     } catch (error) {
-        /* console.log(error); */
-        res.status(500).json({ estado: false, msg: "Error al crear especialidad" });
+        // console.log(error);
+        res.status(500).json({ estado: false, msg: "❌ Error al crear especialidad" });
     }
 };
 
@@ -54,9 +54,9 @@ const actualizarEspecialidad = async (req, res) => {
         const { nombre } = req.body;
         const unaEspecialidadActualizada = await Especialidades.actualizarEspecialidad(id_especialidad, nombre);
         res.status(200).json({
-            unaEspecialidadActualizada,
+            especialidad: unaEspecialidadActualizada,
             estado: true,
-            msg: `Especialidad con id ${id_especialidad} actualizada con éxito!`,
+            msg: `Especialidad con id ${id_especialidad} actualizada con éxito! 🎉`,
         });
     } catch (error) {
         /* console.log(error); */
@@ -70,9 +70,9 @@ const eliminarEspecialidad = async (req, res) => {
         const { id_especialidad } = req.params;
         const unaEspecialidadEliminada = await Especialidades.eliminarEspecialidad(id_especialidad);
         res.status(200).json({
-            unaEspecialidadEliminada,
+            especialidad: unaEspecialidadEliminada,
             estado: true,
-            msg: `Especialidad eliminada con éxito!`,
+            msg: `Especialidad eliminada con éxito! 🎉`,
         });
     } catch (error) {
         /* console.log(error); */
