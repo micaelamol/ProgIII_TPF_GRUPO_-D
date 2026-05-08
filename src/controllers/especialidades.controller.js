@@ -1,4 +1,4 @@
-import { EspecialidadesModel as Especialidades } from "../db/especialidades.js";
+import { Especialidades } from "../db/especialidades.js";
 
 // GET todas
 const obtenerEspecialidades = async (req, res) => {
@@ -10,7 +10,7 @@ const obtenerEspecialidades = async (req, res) => {
             msg: "Especialidades obtenidas con éxito!",
         });
     } catch (error) {
-        console.log(error);
+        /* console.log(error); */
         res.status(500).json({ estado: false, msg: "Error al obtener especialidades" });
     }
 };
@@ -19,14 +19,14 @@ const obtenerEspecialidades = async (req, res) => {
 const obtenerEspecialidadPorId = async (req, res) => {
     try {
         const { id_especialidad } = req.params;
-        const listado = await Especialidades.listarEspecialidades(id_especialidad);
+        const listado = await Especialidades.listarEspecialidadPorId(id_especialidad);
         res.status(200).json({
             listado,
             estado: true,
             msg: "Especialidad obtenida con éxito!",
         });
     } catch (error) {
-        console.log(error);
+        /* console.log(error); */
         res.status(error.status || 500).json({ estado: false, msg: error.message });
     }
 };
@@ -42,7 +42,7 @@ const crearEspecialidad = async (req, res) => {
             msg: "Especialidad creada con éxito!",
         });
     } catch (error) {
-        console.log(error);
+        /* console.log(error); */
         res.status(500).json({ estado: false, msg: "Error al crear especialidad" });
     }
 };
@@ -59,7 +59,7 @@ const actualizarEspecialidad = async (req, res) => {
             msg: `Especialidad con id ${id_especialidad} actualizada con éxito!`,
         });
     } catch (error) {
-        console.log(error);
+        /* console.log(error); */
         res.status(error.status || 500).json({ estado: false, msg: error.message });
     }
 };
@@ -75,7 +75,7 @@ const eliminarEspecialidad = async (req, res) => {
             msg: `Especialidad eliminada con éxito!`,
         });
     } catch (error) {
-        console.log(error);
+        /* console.log(error); */
         res.status(error.status || 500).json({ estado: false, msg: error.message });
     }
 };
