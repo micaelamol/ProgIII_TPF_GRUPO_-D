@@ -1,0 +1,59 @@
+import { Router } from "express";
+import { check, param } from "express-validator";
+import { ObrasSocialesController } from "../../controllers/obrasSocialesController.js";
+import { validarCampos } from "../../middlewares/validarCampos.js";
+
+const router = Router();
+
+// GET de todas las obras sociales
+router.get(
+    "/",
+    ObrasSocialesController.obtenerObrasSociales
+);
+
+// GET — una obra social por ID
+router.get(
+    "/:id_obra_social",
+    [
+        param("id_obra_social", "El ID debe ser un número entero").isInt(),
+        validarCampos
+    ],
+    ObrasSocialesController.obtenerObraSocialPorId
+);
+
+// POST para crear obra social
+router.post(
+    "/",
+    [
+        check("nombre")
+            .notEmpty().withMessage("El nombre es obligatorio.")
+            .isLength({ max: 120 }).withMessage("Máximo 120 caracteres."),
+        validarCampos
+    ],
+    ObrasSocialesController.crearObraSocial
+);
+
+// PUT — modificar obra social
+router.put(
+    "/:id_obra_social",
+    [
+        param("id_obra_social", "El ID debe ser un número entero").isInt(),
+        check("nombre")
+            .notEmpty().withMessage("El nombre es obligatorio.")
+            .isLength({ max: 120 }).withMessage("Máximo 120 caracteres."),
+        validarCampos
+    ],
+    ObrasSocialesController.actualizarObraSocial
+);
+
+// DELETE — eliminar obra social
+router.delete(
+    "/:id_obra_social",
+    [
+        param("id_obra_social", "El ID debe ser un número entero").isInt(),
+        validarCampos
+    ],
+    ObrasSocialesController.eliminarObraSocial
+);
+
+export default router;
